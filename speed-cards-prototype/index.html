@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Cards Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+
+        <h1>Speed Cards Prototype</h1>
+
+        <!-- 암기 환경 설정 -->
+        <section class="settings">
+            <label for="visible-count">표시 카드 수:</label>
+
+            <select id="visible-count">
+                <option value="1">1장</option>
+                <option value="2">2장</option>
+                <option value="3" selected>3장</option>
+                <option value="4">4장</option>
+            </select>
+        </section>
+
+        <!-- 타이머 -->
+        <section class="timer-section">
+            <p id="timer-label">남은 암기 시간</p>
+            <div id="timer">05:00</div>
+        </section>
+
+        <!-- 상태 안내 -->
+        <p id="status">암기 시작을 눌러주세요.</p>
+
+        <!-- 카드 표시 영역 -->
+        <section id="card-area"></section>
+
+        <!-- 현재 카드 위치 -->
+        <p id="position-info">암기 시작 전</p>
+
+        <!-- 회상 화면 -->
+        <section id="recall-section" hidden>
+
+            <h2>회상 단계 (Recall)</h2>
+
+            <p id="recall-count">입력한 카드: 0 / 52</p>
+
+            <!-- 회상 순서 입력 영역 -->
+            <h3>기억한 카드의 순서</h3>
+
+            <div id="recall-slots"></div>
+
+            <!-- 현재 선택된 위치 -->
+            <p id="selected-position"></p>
+
+            <button id="recall-delete">
+                선택 위치 삭제
+            </button>
+
+            <!-- 선택 가능한 전체 카드 -->
+            <h3>카드 선택</h3>
+
+            <div id="recall-pool"></div>
+
+        </section>
+
+
+        <!-- 카드 이동 버튼 -->
+        <section class="controls">
+            <button id="prev-button" disabled>
+                ← 이전
+            </button>
+
+            <button id="next-button" disabled>
+                다음 →
+            </button>
+        </section>
+
+        <!-- 암기 시작 및 종료 버튼 -->
+        <section class="controls">
+            <button id="start-button">암기 시작</button>
+
+            <button id="finish-button" hidden>
+                암기 종료
+            </button>
+
+            <button id="recall-start-button" hidden>
+                회상 시작
+            </button>
+
+            <button id="recall-submit-button" hidden>
+                회상 제출
+            </button>
+
+            <button id="reset-button" hidden>
+                다시 준비
+            </button>
+        </section>
+
+        <p class="keyboard-guide">
+            Space: 암기 시작·종료, 회상 시작, 다시 준비
+            / ← →: 카드 이동
+        </p>
+
+        <!-- 채점 결과 화면 -->
+        <section id="result-section" hidden>
+
+            <h2>훈련 결과 (Result)</h2>
+
+            <!-- 전체 채점 결과 -->
+            <div id="score-summary"></div>
+
+            <h3>카드별 채점 결과</h3>
+
+            <!-- 카드별 상세 결과 -->
+            <table id="score-table">
+
+                <thead>
+                    <tr>
+                        <th>순서</th>
+                        <th>정답 카드</th>
+                        <th>회상 카드</th>
+                        <th>채점 결과</th>
+                    </tr>
+                </thead>
+
+                <tbody id="score-details"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="deck.js"></script>
+    <script src="timer.js"></script>
+    <script src="memorization.js"></script>
+    <script src="recall.js"></script>
+    <script src="scoring.js"></script>
+    <script src="main.js"></script>
+    
+</body>
+
+</html>

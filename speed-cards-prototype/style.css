@@ -1,0 +1,358 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #222;
+    text-align: center;
+    padding: 40px;
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #222;
+    text-align: center;
+    margin: 0;
+    padding: 24px 16px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.settings {
+    margin: 20px 0;
+}
+
+select {
+    font-size: 16px;
+    padding: 6px 12px;
+}
+
+.timer-section {
+    margin: 20px 0;
+}
+
+.timer-section p {
+    margin-bottom: 8px;
+}
+
+#timer {
+    font-size: 48px;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+#status {
+    min-height: 24px;
+}
+
+/* 카드 표시 영역 */
+#card-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 250px;
+    padding: 20px 8px;
+
+    background-color: #176044;
+    border-radius: 12px;
+}
+
+/* 개별 카드 */
+.playing-card {
+    position: relative;
+
+    width: 112px;
+    height: 156px;
+    flex: 0 0 112px;
+
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 9px;
+
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 두 번째 카드부터 겹치게 배치 */
+.playing-card + .playing-card {
+    margin-left: -52px;
+}
+
+/* 카드 오른쪽 상단의 숫자와 무늬 */
+.card-index {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* 카드 중앙의 무늬 */
+.card-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+}
+
+/* 카드 색상 */
+.red {
+    color: #c62828;
+}
+
+.black {
+    color: #171717;
+}
+
+/* 카드 이동 및 시작, 종료 버튼 */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+
+    border: 1px solid #999;
+    border-radius: 6px;
+    background-color: white;
+
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    background-color: #e5e5e5;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#start-button,
+#finish-button {
+    background-color: #176044;
+    color: white;
+    border: none;
+}
+
+.keyboard-guide {
+    margin-top: 24px;
+    font-size: 14px;
+    color: #666;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* 회상 화면 */
+#recall-section {
+    margin-top: 24px;
+}
+
+#recall-section h3 {
+    font-size: 18px;
+    margin-top: 24px;
+}
+
+/* 회상 순서 입력 영역 */
+#recall-slots {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 6px;
+}
+
+/* 개별 회상 입력 칸 */
+.recall-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    height: 64px;
+    padding: 5px 2px;
+
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+/* 회상 카드의 순서 번호 */
+.slot-number {
+    font-size: 12px;
+    color: #777;
+}
+
+/* 입력한 카드의 숫자와 무늬 */
+.slot-value {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* 현재 선택한 입력 칸 */
+.recall-slot.selected {
+    outline: 2px solid #2878d0;
+    background-color: #e3efff;
+}
+
+/* 선택 가능한 카드 영역 */
+#recall-pool {
+    display: grid;
+    gap: 8px;
+
+    padding: 12px;
+    background-color: #176044;
+    border-radius: 10px;
+}
+
+/* 같은 무늬의 카드들을 한 줄에 배치 */
+.recall-suit-row {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 5px;
+}
+
+/* 선택 가능한 개별 카드 */
+.recall-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    height: 68px;
+    padding: 4px 2px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* 이미 사용된 카드 */
+.recall-choice:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+/* 회상 시작 및 제출 버튼 */
+#recall-start-button,
+#recall-submit-button {
+    background-color: #176044;
+    color: white;
+    border: none;
+}
+
+/* 화면 너비가 좁은 경우 */
+@media (max-width: 600px) {
+
+    #recall-slots,
+    .recall-suit-row {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+}
+
+/* 채점 결과 화면 */
+#result-section {
+    margin-top: 30px;
+}
+
+/* 전체 채점 결과 배치 */
+#score-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 24px 0;
+}
+
+/* 개별 결과 항목 */
+.score-item {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    padding: 16px 8px;
+}
+
+.score-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.score-value {
+    margin-top: 8px;
+
+    font-size: 24px;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 카드별 채점 결과 표 */
+#score-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+#score-table th,
+#score-table td {
+    padding: 12px 8px;
+    border: 1px solid #ddd;
+}
+
+#score-table th {
+    background-color: #e9e9e9;
+}
+
+/* 정답 */
+.score-correct {
+    background-color: #e4f3e8;
+    color: #216b39;
+}
+
+/* 오답 */
+.score-wrong {
+    background-color: #fce5e5;
+    color: #b32626;
+}
+
+/* 미입력 */
+.score-empty {
+    background-color: #eeeeee;
+    color: #666;
+}
+
+/* 화면 너비가 좁은 경우 */
+@media (max-width: 600px) {
+
+    #score-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .score-value {
+        font-size: 20px;
+    }
+}
