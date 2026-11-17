@@ -1,0 +1,19 @@
+# 연구 및 실험 데이터
+*.csv
+*.json
+data/
+exports/
+
+# 압축 백업 파일
+*.zip
+
+# 인증 및 환경 설정 정보
+.env
+.env.*
+
+# VS Code 설정
+.vscode/
+
+# 운영체제 관련 파일
+Thumbs.db
+.DS_Store
